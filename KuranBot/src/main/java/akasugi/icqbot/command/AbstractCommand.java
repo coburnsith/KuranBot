@@ -1,16 +1,13 @@
 package akasugi.icqbot.command;
 
-import cc.moecraft.icq.event.Event;
+import cc.moecraft.icq.event.events.message.EventGroupMessage;
 
 public abstract class AbstractCommand {
 	
-	String prefix;
 	
-	public String getPrefix(){
-		return prefix;
-	}
+	abstract public String getPrefix();
 	
-	abstract public void receiveEvent(Event event);
+	abstract public void receiveGroupCommand(String command,EventGroupMessage event);
 	
 	
 

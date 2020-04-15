@@ -1,10 +1,12 @@
 package akasugi.icqbot;
 
-import akasugi.icqbot.event.GroupMsgListener;
+import akasugi.icqbot.command.CommandManager;
+import akasugi.icqbot.command.KuranCommand;
+import akasugi.icqbot.event.MsgListener;
 import cc.moecraft.icq.PicqBotX;
 import cc.moecraft.icq.PicqConfig;
 
-public class KuranBot {
+public class KuranBot{
 
 	public static void main(String[] args) {
 		
@@ -12,7 +14,8 @@ public class KuranBot {
 		PicqBotX bot = new PicqBotX(config);
 		bot.addAccount("bot1","127.0.0.1",31091);
 		
-		bot.getEventManager().registerListener(new GroupMsgListener());
+		CommandManager.registerCommand(new KuranCommand());
+		bot.getEventManager().registerListener(new MsgListener());
 		
 		bot.startBot();
 
