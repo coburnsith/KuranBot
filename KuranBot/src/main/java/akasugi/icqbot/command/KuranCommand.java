@@ -12,8 +12,7 @@ public class KuranCommand extends AbstractCommand{
 	}
 
 	@Override
-	public void receiveGroupCommand(String command, EventGroupMessage event) {
-		event.getHttpApi().sendGroupMsg(event.getGroupId(), command);
+	public void receiveGroupCommand(CommandReader read, EventGroupMessage event) {
 		
 	}
 
