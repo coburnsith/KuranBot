@@ -1,21 +1,47 @@
 package akasugi.icqbot.command;
 
+
 import static org.junit.Assert.assertArrayEquals;
 
-import org.junit.Test;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+
+@RunWith(Parameterized.class)
 public class TestCommandReader {
-	String[] commands= {"/dir test","/cd test","/会战 出刀","/抽卡 十连 一发入魂"};
-	String[] prefixs= {"/dir","/cd","/会战","/抽卡"};
-	String[] secondPhrase= {"test","test","出刀","十连 一发入魂"};
 	
-	@Test
-	public void nextPhraseTest(){
-		int i=0;
-		for(String c:commands) {
-			commands[i++]=new CommandReader(c).nextPhrase();
-		}
-		assertArrayEquals(commands, prefixs);
+	@Parameterized.Parameters
+	public static Collection<Object[]> data(){
+		return Arrays.asList(new Object[][] {
+			{"/java -jar test.java",new String[] {"/java","-jar","test.java"}}
+			,{"/shutdown -s -t 3600",new String[] {"/shutdown","-s","-t","3600"}}
+		});
+	}
+	
+	private String input;
+	private String[] expected;
+	
+	public TestCommandReader(String input, String[] expected) {
+		this.input = input;
+		this.expected = expected;
 	}
 
+	@Test
+	public void testPhrase() {
+		
+		CommandReader reader=new CommandReader(input);
+		ArrayList<String> actual=new ArrayList<String>();
+		int length=0;
+		while(reader.hasNext()) {
+			actual.add(reader.nextPhrase());
+			length++;
+		}
+		assertArrayEquals(expected, actual.toArray(new String[length]));
+		
+	}
+	
 }
