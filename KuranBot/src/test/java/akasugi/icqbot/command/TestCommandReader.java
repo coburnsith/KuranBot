@@ -17,8 +17,10 @@ public class TestCommandReader {
 	@Parameterized.Parameters
 	public static Collection<Object[]> data(){
 		return Arrays.asList(new Object[][] {
-			{"/java -jar test.java",new String[] {"/java","-jar","test.java"}}
-			,{"/shutdown -s -t 3600",new String[] {"/shutdown","-s","-t","3600"}}
+			{"/java -jar test.java",new String[] {"java","-jar","test.java"}}
+			,{"/shutdown -s -t 3600",new String[] {"shutdown","-s","-t","3600"}}
+			,{"/会战 -删除成员 张三",new String[]{"会战","-删除成员","张三"}}
+			,{"/复读 -次数 3 -间隔 2 我是复读机",new String[]{"复读","-次数","3","-间隔","2","我是复读机"}}
 		});
 	}
 	

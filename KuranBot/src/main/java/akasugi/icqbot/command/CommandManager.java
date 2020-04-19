@@ -18,7 +18,7 @@ public class CommandManager {
 		CommandReader reader=new CommandReader(command);
 		String prefix=reader.nextPhrase();
 		if(commands.containsKey(prefix)){
-			commands.get(prefix).receiveGroupCommand(reader, event);
+			commands.get(prefix).execute(reader, event);
 		}
 		
 	}

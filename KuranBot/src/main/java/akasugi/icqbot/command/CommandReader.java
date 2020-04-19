@@ -1,9 +1,12 @@
 package akasugi.icqbot.command;
 
+import cc.moecraft.icq.event.events.message.EventMessage;
+
 public class CommandReader {
 	
 	String command;
-	int index=0;
+	int index=1;
+	EventMessage event;
 	StringBuilder builder=new StringBuilder("");
 	
 	private boolean nextIsSpace() {
@@ -23,32 +26,37 @@ public class CommandReader {
 		return index < command.length();
 	}
 	
+	public boolean nextIsQuotation(){
+		return command.charAt(index)=='\"';
+	}
+	
+	public boolean nextIsOption(){
+		char next=next();
+		if(next=='/' || next=='-'){
+			return true;
+		}else{
+			index--;
+			return false;
+		}
+	}
+	
 	public char next() {
 		return command.charAt(index++);
 	}
 	
 	public String nextPhrase() {
 		String phrase;
+		if(hasNext()&&nextIsQuotation()){
+			
+		}
 		while(hasNext() && !nextIsSpace()) {
 			builder.append(next());
 		}
+		
 		skipSpace();
 		phrase=builder.toString();
 		builder.setLength(0);
 		return phrase;
 	}
 	
-	public static String getPrefix(String command) {
-		StringBuilder prefix=new StringBuilder("");
-		char c=0;
-		for(int i=0;i<command.length()&&(c=command.charAt(i))!=' ';i++) {
-			prefix.append(c);
-		}
-		return prefix.toString();
-	}
-	
-	public static String removePrefix(String command) {
-		return command.replace(getPrefix(command), "").trim();
-	}
-
 }

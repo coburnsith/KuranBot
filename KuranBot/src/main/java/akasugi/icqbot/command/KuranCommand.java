@@ -4,7 +4,8 @@ import cc.moecraft.icq.event.events.message.EventGroupMessage;
 
 public class KuranCommand extends AbstractCommand{
 	
-	private String prefix="/会战";
+	private String prefix="会战";
+	CommandReader reader;
 	
 	@Override
 	public String getPrefix() {
@@ -12,9 +13,8 @@ public class KuranCommand extends AbstractCommand{
 	}
 
 	@Override
-	public void receiveGroupCommand(CommandReader read, EventGroupMessage event) {
+	public void execute(CommandReader reader, EventGroupMessage event) {
 		
 	}
-
-
+	
 }
