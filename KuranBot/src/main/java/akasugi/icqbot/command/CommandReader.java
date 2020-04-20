@@ -26,31 +26,52 @@ public class CommandReader {
 		return index < command.length();
 	}
 	
-	public boolean nextIsQuotation(){
-		return command.charAt(index)=='\"';
-	}
-	
 	public boolean nextIsOption(){
-		char next=next();
-		if(next=='/' || next=='-'){
+		if(present()=='/' || present()=='-') {
+			index++;
 			return true;
-		}else{
-			index--;
+		}else {
 			return false;
 		}
+			
+	}
+	
+	public char present() {
+		return command.charAt(index);
 	}
 	
 	public char next() {
 		return command.charAt(index++);
 	}
 	
-	public String nextPhrase() {
+	public String nextPhrase() throws CommandFormatException{
 		String phrase;
-		if(hasNext()&&nextIsQuotation()){
-			
+		boolean quotationPaired = true;
+		
+		if(present()=='\"') {
+			//返回带引号的元素
+			index++;
+			quotationPaired=false;
+			while(hasNext()) {
+				if(present()=='\"') {
+					index++;
+					quotationPaired=true;
+					break;
+				}
+				builder.append(next());
+			}
+		}else {
+			//返回不带引号的元素
+			while(hasNext() && !nextIsSpace()) {
+				if(present()=='\"') {
+					throw new CommandFormatException();
+				}
+				builder.append(next());
+			}
 		}
-		while(hasNext() && !nextIsSpace()) {
-			builder.append(next());
+		
+		if(!quotationPaired) {
+			throw new CommandFormatException();
 		}
 		
 		skipSpace();

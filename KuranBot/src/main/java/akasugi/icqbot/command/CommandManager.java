@@ -16,9 +16,15 @@ public class CommandManager {
 	public static void forwardGroupCommand(EventGroupMessage event){
 		String command=event.getMessage();
 		CommandReader reader=new CommandReader(command);
-		String prefix=reader.nextPhrase();
-		if(commands.containsKey(prefix)){
-			commands.get(prefix).execute(reader, event);
+		String prefix;
+		try {
+			prefix = reader.nextPhrase();
+			if(commands.containsKey(prefix)){
+				commands.get(prefix).execute(reader, event);
+			}
+		} catch (CommandFormatException e) {
+			event.getHttpApi().sendGroupMsg(event.getGroupId(), e.getMsg());
+			e.printStackTrace();
 		}
 		
 	}
