@@ -43,7 +43,7 @@ public class TestCommandReader {
 	@Test
 	public void testPhrase() {
 		
-		CommandReader reader=new CommandReader(input);
+		CommandReader reader=new CommandReader(input,null);
 		ArrayList<String> actual=new ArrayList<String>();
 		int length=0;
 		try {

@@ -2,12 +2,21 @@ package akasugi.icqbot.command;
 
 import cc.moecraft.icq.event.events.message.EventMessage;
 
-public class CommandReader {
+public class CommandReader<T extends EventMessage> {
 	
-	String command;
-	int index=1;
-	EventMessage event;
-	StringBuilder builder=new StringBuilder("");
+	private String command;
+	private	int index=1;
+	private T event;
+	private	StringBuilder builder=new StringBuilder("");
+	
+	public CommandReader(String command,T event) {
+		this.command=command.trim();
+		this.event=event;
+	}
+	
+	public T getEvent() {
+		return event;
+	}
 	
 	private boolean nextIsSpace() {
 		return command.charAt(index)==' ';
@@ -16,10 +25,6 @@ public class CommandReader {
 	private void skipSpace() {
 		while(hasNext() && nextIsSpace())
 			index++;
-	}
-	
-	public CommandReader(String command) {
-		this.command=command.trim();
 	}
 	
 	public boolean hasNext() {

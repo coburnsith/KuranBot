@@ -1,13 +1,13 @@
 package akasugi.icqbot.command;
 
-import cc.moecraft.icq.event.events.message.EventGroupMessage;
+import cc.moecraft.icq.event.events.message.EventMessage;
 
-public abstract class AbstractCommand {
+public abstract class AbstractCommand<T extends EventMessage> {
 	
 	
 	abstract public String getPrefix();
 	
-	abstract public void execute(CommandReader reader,EventGroupMessage event);
+	abstract public void execute(CommandReader<T> reader) throws CommandFormatException;
 	
 	
 

@@ -14,13 +14,13 @@ public class CommandManager {
 	}
 	
 	public static void forwardGroupCommand(EventGroupMessage event){
-		String command=event.getMessage();
-		CommandReader reader=new CommandReader(command);
+		String command=ShortcutCommand.transformShortcut(event.getMessage());
+		CommandReader<EventGroupMessage> reader=new CommandReader<EventGroupMessage>(command,event);
 		String prefix;
 		try {
 			prefix = reader.nextPhrase();
 			if(commands.containsKey(prefix)){
-				commands.get(prefix).execute(reader, event);
+				commands.get(prefix).execute(reader);
 			}
 		} catch (CommandFormatException e) {
 			event.getHttpApi().sendGroupMsg(event.getGroupId(), e.getMsg());
