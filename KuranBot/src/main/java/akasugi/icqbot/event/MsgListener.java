@@ -11,7 +11,8 @@ public class MsgListener extends IcqListener{
 	@EventHandler
 	public void forwardEvent(EventMessage event){
 		
-		if(event instanceof EventGroupMessage && event.getMessage().startsWith("/")) {
+		//监听消息事件，如果收到的是 群消息 且以“/”开头，则转发给CommandManager
+		if(event instanceof EventGroupMessage && event.getMessage().trim().startsWith("/")) {
 			Thread thread=new Thread(new Runnable() {
 				
 				@Override

@@ -1,20 +1,20 @@
 package akasugi.icqbot.command;
 
-import cc.moecraft.icq.event.events.message.EventMessage;
+import cc.moecraft.icq.event.events.message.EventGroupMessage;
 
-public class CommandReader<T extends EventMessage> {
+public class CommandReader {
 	
 	private String command;
 	private	int index=1;
-	private T event;
+	private EventGroupMessage event;
 	private	StringBuilder builder=new StringBuilder("");
 	
-	public CommandReader(String command,T event) {
+	public CommandReader(String command,EventGroupMessage event) {
 		this.command=command.trim();
 		this.event=event;
 	}
 	
-	public T getEvent() {
+	public EventGroupMessage getEvent() {
 		return event;
 	}
 	
@@ -49,6 +49,7 @@ public class CommandReader<T extends EventMessage> {
 		return command.charAt(index++);
 	}
 	
+	//返回当前语句块，并将光标移动到下一个语句块开头
 	public String nextPhrase() throws CommandFormatException{
 		String phrase;
 		boolean quotationPaired = true;

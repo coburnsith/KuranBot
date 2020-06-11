@@ -61,7 +61,6 @@ public class KuranBattle {
 		Long menberId=event.getSenderId();
 		IcqHttpApi api=event.getHttpApi();
 		int check=check(groupId,menberId);
-		System.out.println("check is "+check);
 		
 		switch(check){
 		case 0:

@@ -1,9 +1,9 @@
 package akasugi.icqbot;
 
 import akasugi.icqbot.command.CommandManager;
-import akasugi.icqbot.command.KuranCommand;
 import akasugi.icqbot.command.ShortcutCommand;
 import akasugi.icqbot.event.MsgListener;
+import akasugi.icqbot.plugin.kuran.KuranCommand;
 import cc.moecraft.icq.PicqBotX;
 import cc.moecraft.icq.PicqConfig;
 

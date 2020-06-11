@@ -14,6 +14,7 @@ public class ShortcutCommand {
 		
 	}
 	
+	//返回转化后的快捷命令
 	public static String transformShortcut(String command){
 		if(shortcuts.containsKey(command))
 			return shortcuts.get(command);
